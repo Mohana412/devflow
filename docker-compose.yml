@@ -1,4 +1,17 @@
 services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: devflow-api
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql://devflow:devflow@postgres:5432/devflow
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+
   postgres:
     image: postgres:16
     container_name: devflow-postgres
